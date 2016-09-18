@@ -34,17 +34,21 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.DefaultCookieSpecProvider;
 import org.apache.http.message.BasicNameValuePair;
+import util.MD5Utils;
 
 import javax.imageio.ImageIO;
 import javax.ws.rs.core.MultivaluedMap;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.Inet4Address;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -157,7 +161,16 @@ public class TestMain {
         users.add(new BasicNameValuePair("fengyexing711", "shadi5170"));
         users.add(new BasicNameValuePair("haowei531", "jijing8241"));
         users.add(new BasicNameValuePair("xiesishan926", "juyuan3367"));
-        users.add(new BasicNameValuePair("weiji955", "zhuobu3335"));
+        users.add(new BasicNameValuePair("aochifei704", "shangfei9301"));
+        users.add(new BasicNameValuePair("yutong013", "goujing6390"));
+        users.add(new BasicNameValuePair("fengya915", "bibei3716"));
+        users.add(new BasicNameValuePair("bingxiong718", "weitu3637"));
+        users.add(new BasicNameValuePair("yugu809", "jiezhang1470"));
+        users.add(new BasicNameValuePair("qipintu063", "kenwen6528"));
+        users.add(new BasicNameValuePair("pangxin789", "zhanmeng3144"));
+        users.add(new BasicNameValuePair("gongpo954", "chengsu0474"));
+        users.add(new BasicNameValuePair("hongweiji537", "yulang1452"));
+        users.add(new BasicNameValuePair("heqiao157", "yacong3809"));
 
         for (BasicNameValuePair pair : users) {
             TVClient client = new DouyuTVClient();
@@ -166,8 +179,39 @@ public class TestMain {
             client.joinRoom(roomId);
         }
 
+//        Socket socket = new Socket();
+//        socket.connect(new InetSocketAddress("119.90.49.93", 8063));
+//        OutputStream outputStream = socket.getOutputStream();
+//
+//        String devId = UUID.randomUUID().toString();
+//        String time = System.currentTimeMillis()/100000 + "";
+//        String vk = time + "7oE9nPEG9xXV69phU31FYCLUagKeYtsF" + devId;
+//        String msg = "type@=loginreq/username@=51270567/ct@=0/password@=/roomid@=260594/devid@=" + devId + "/rt@=" + System.currentTimeMillis()/100000 + "/vk@=" + MD5Utils.MD5(vk) + "/ver@=20150929/aver@=2016091401/ltkid@=96258985/biz@=1/stk@=72a93317eb4c7200/";
+//
+//        byte[] length = new byte[4];
+//
+//        ByteBuffer.wrap(length).order(ByteOrder.LITTLE_ENDIAN).array();
+//        byte[] bytes = intToByteArray(msg.getBytes().length + 12);
+//
+//        outputStream.write(bytes);
+//        outputStream.write(bytes);
+//        outputStream.write(new byte[] {(byte)0xb1, 0x02, 0x00, 0x00});
+//        outputStream.write(msg.getBytes());
+//
+//        IOUtils.copy(socket.getInputStream(), System.out);
+
     }
 
+    static byte[] intToByteArray( int data ) {
 
+        byte[] result = new byte[4];
+
+        result[3] = (byte) ((data & 0xFF000000) >> 24);
+        result[2] = (byte) ((data & 0x00FF0000) >> 16);
+        result[1] = (byte) ((data & 0x0000FF00) >> 8);
+        result[0] = (byte) ((data & 0x000000FF) >> 0);
+
+        return result;
+    }
 
 }

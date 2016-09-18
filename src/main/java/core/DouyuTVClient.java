@@ -60,6 +60,7 @@ public class DouyuTVClient implements TVClient {
 
         PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
         poolingHttpClientConnectionManager.setMaxTotal(100);
+        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(30);
         httpClient = HttpClients.custom()
                 .setDefaultCookieSpecRegistry(r)
                 .setDefaultRequestConfig(requestConfig)
